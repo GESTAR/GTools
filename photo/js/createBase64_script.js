@@ -3,11 +3,13 @@ chrome.extension.onConnect.addListener(function (port) {
 	port.onMessage.addListener(function (msg) {
 		console.log(msg);
 		if (msg.cmd.indexOf("getImageBase64")>=0) {
-			var url = decodeURIComponent(msg.cmd.split('_')[1]);
+			var url = decodeURIComponent(msg.cmd.split('_gTools_photo_url_')[1]);
 			console.log(url);
 			var img = new Image();
 			img.src = url;
 			var canvas = document.createElement("canvas");
+			canvas.width=img.width;
+			canvas.height=img.height;
 			var ctx = canvas.getContext("2d");
 			ctx.drawImage(img, 0, 0);
 			var data = canvas.toDataURL();

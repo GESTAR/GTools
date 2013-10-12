@@ -19,7 +19,7 @@ function imageOnClick(info, tab) {
 						name : "gTools_photo_t"
 					});
 				tPort.postMessage({
-					cmd : "getImageBase64_"+encodeURIComponent(info.srcUrl)
+					cmd : "getImageBase64_gTools_photo_url_"+encodeURIComponent(info.srcUrl)
 				});
 				tPort.onMessage.addListener(function (msg) {
 					console.log(msg);
