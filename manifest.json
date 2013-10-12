@@ -1,0 +1,13 @@
+{ 
+	"name": "GTools", 
+	"description": "1.通过选中网页内容直接在百度地图中搜索2.新窗口打开链接3.图片编辑", 
+	"version": "1.0.0",
+	"manifest_version": 2,
+	"icons": {
+		"128": "icon128.png" 
+	},
+	"permissions": ["contextMenus", "tabs", "http://*/*"], 
+	"background": { 
+		"scripts": ["main.js"] 
+	}
+} 
