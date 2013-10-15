@@ -271,6 +271,11 @@
 		});
 		port.onMessage.addListener(function (msg) {
 			console.log(msg);
+			if(msg.success==false){
+				alert('读取图片出错');
+				window.close();
+				return;
+			}
 			pic.src = msg.imageBase64;
 			Main.init();
 		});

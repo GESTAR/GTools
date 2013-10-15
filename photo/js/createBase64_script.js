@@ -1,10 +1,8 @@
 chrome.extension.onConnect.addListener(function (port) {
 	console.assert(port.name == "gTools_photo_t");
 	port.onMessage.addListener(function (msg) {
-		console.log(msg);
 		if (msg.cmd.indexOf("getImageBase64")>=0) {
 			var url = decodeURIComponent(msg.cmd.split('_gTools_photo_url_')[1]);
-			console.log(url);
 			var img = new Image();
 			img.src = url;
 			var canvas = document.createElement("canvas");
@@ -12,10 +10,16 @@ chrome.extension.onConnect.addListener(function (port) {
 			canvas.height=img.height;
 			var ctx = canvas.getContext("2d");
 			ctx.drawImage(img, 0, 0);
-			var data = canvas.toDataURL();
+			var data = '',_success=true;
+			try{
+				data = canvas.toDataURL();
+			}catch(e){
+				_success = false;
+			}
 
 			port.postMessage({
-				imageBase64 : canvas.toDataURL()
+				success	: _success,
+				imageBase64 : data
 			});
 		}
 	});
