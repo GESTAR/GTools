@@ -14,6 +14,7 @@ function selectionOnClick(info, tab) {
 	window.open('http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D' + info.selectionText);
 }
 function imageOnClick(info, tab) {
+	console.log(info.srcUrl+','+info.pageUrl);
 	if(getDomain(info.srcUrl)!=getDomain(info.pageUrl)){
 		console.log('图片所在DOMAIN不是url domain');
 		alert('不能编辑此图片');
