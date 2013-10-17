@@ -5,22 +5,25 @@ chrome.extension.onConnect.addListener(function (port) {
 			var url = decodeURIComponent(msg.cmd.split('_gTools_photo_url_')[1]);
 			var img = new Image();
 			img.src = url;
-			var canvas = document.createElement("canvas");
-			canvas.width=img.width;
-			canvas.height=img.height;
-			var ctx = canvas.getContext("2d");
-			ctx.drawImage(img, 0, 0);
-			var data = '',_success=true;
-			try{
-				data = canvas.toDataURL();
-			}catch(e){
-				_success = false;
+			img.onload = function(){
+				var canvas = document.createElement("canvas");
+				canvas.width=img.width;
+				canvas.height=img.height;
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0);
+				var data = '',_success=true;
+				try{
+					data = canvas.toDataURL();
+				}catch(e){
+					_success = false;
+				}
+				
+				console.log(data)
+				port.postMessage({
+					success	: _success,
+					imageBase64 : data
+				});
 			}
-
-			port.postMessage({
-				success	: _success,
-				imageBase64 : data
-			});
-		}
+		};
 	});
 });
