@@ -263,6 +263,8 @@
         msgEle = document.getElementById("infoMsg");
 
         //$AI.useWorker("js/combined/alloyimage.js");
+		
+		//connect to main to get base64
 		var port = chrome.extension.connect({
 				name : "gTools_photo"
 			});
